@@ -1,8 +1,9 @@
 from dreamparser import DreamParser
-from database import db, Dream
+from database import DataBase
 
 
 def main():
+    dream_base = DataBase()
     dream_parser = DreamParser(1)
     
     dream_html = dream_parser.get_next_dream_html()
@@ -14,11 +15,7 @@ def main():
 
         dream_html = dream_parser.get_next_dream_html()
     
-    db.connect()
-    db.create_tables([Dream])
-    
-    with db.atomic():
-        Dream.insert_many(dreams).execute()
+    dream_base.write(dreams)
 
 
 if __name__ == '__main__':
