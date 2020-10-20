@@ -13,3 +13,16 @@ class Dream(Model):
 
     class Meta:
         database = db
+        
+        
+class DataBase:
+
+    def __init__(self):
+        db.connect()
+        db.create_tables([Dream])
+
+    def write(self, data):
+        print('Writing data to base')
+
+        with db.atomic():
+            Dream.insert_many(data).execute()
