@@ -5,10 +5,10 @@ db = SqliteDatabase(config.BASE_NAME)
 
 
 class Dream(Model):
-    id = IntegerField()
+    id = CharField(max_length=4, primary_key=True)
     letter = CharField(max_length=1)
-    title = TextField(primary_key=True)
-    group = TextField()
+    title = CharField(max_length=25)
+    group = CharField(max_length=25)
     context = TextField()
 
     class Meta:
